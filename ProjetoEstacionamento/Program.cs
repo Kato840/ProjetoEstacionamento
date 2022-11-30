@@ -29,9 +29,8 @@ public class Program
                     estacionamento.AdicionarVeiculo(placaAdicionar);
                     Console.Clear();
                     break;
-                case 2: Console.Write("Digite a placa do veículo que deseja remover: ");
-                    string placaRemover = Console.ReadLine();
-                    estacionamento.RemoverVeiculo(placaRemover);
+                case 2: 
+                    estacionamento.RemoverVeiculo();
                     Console.Clear();
                     break;
                 case 3: estacionamento.ListarVeiculos();

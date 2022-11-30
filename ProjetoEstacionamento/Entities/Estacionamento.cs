@@ -30,29 +30,43 @@ public class Estacionamento
         Console.ReadLine();
 
     }
-    public void RemoverVeiculo(string placa)
+    public void RemoverVeiculo()
     {
-        placa.ToLower();        ;        
-        bool a = Veiculos.Contains(placa);
-        if (a)
+        if (Veiculos.Count == 0)
         {
-            Console.Write("Favor digitar o tempo de permanência do veículo em horas: ");
-            int tempoDePermanência = int.Parse(Console.ReadLine());
-            decimal total = PrecoInicial + PrecoPorHora * tempoDePermanência;
-            Console.WriteLine($"Preço a ser pago: R${total}, Remover veículo?(s/n)");
-            string resposta = Console.ReadLine();
-            resposta.ToLower();
-            if (resposta == "s")
-                Veiculos.Remove(placa);
-            Console.WriteLine("Veículo removido com sucesso!");
-            Console.ReadLine();
+            Console.WriteLine("Não existem veículos estacionados");
+        }
+        else
+        {
+            Console.Write("Digite a placa do veículo que deseja remover: ");
+            string placa = Console.ReadLine();
+            placa.ToLower();
+            bool a = Veiculos.Contains(placa);
+            if (a)
+            {
+                Console.Write("Favor digitar o tempo de permanência do veículo em horas: ");
+                int tempoDePermanência = int.Parse(Console.ReadLine());
+                decimal total = PrecoInicial + PrecoPorHora * tempoDePermanência;
+                Console.WriteLine($"Preço a ser pago: R${total}, Remover veículo?(s/n)");
+                string resposta = Console.ReadLine();
+                resposta.ToLower();
+                if (resposta == "s")
+                {
+                    Veiculos.Remove(placa);
+                    Console.WriteLine("Veículo removido com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Veículo não removido!");
+                }               
+            }
+            else if (!a)
+            {
+                Console.WriteLine("Veículo não cadastrado, favor verificar a placa!");
+            }
+        }
+        Console.ReadLine();
 
-        }
-        else if (!a)
-        {
-            Console.WriteLine("Veículo não cadastrado, favor verificar a placa!");
-            Console.ReadLine();
-        }
     }
     public void ListarVeiculos()
     {
@@ -64,6 +78,7 @@ public class Estacionamento
         }
         else
         {
+            Console.WriteLine("Lista de veículos cadastrados:");
             foreach (string veiculo in Veiculos)
             {
                 Console.WriteLine(veiculo);
